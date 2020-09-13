@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quote.dart';
+import 'quote_card.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -22,6 +23,8 @@ class _QuotesListState extends State<QuotesList> {
         text: "A room without books is like a body without a soul.",
         author: "Osca wilde")
   ];
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,10 +35,14 @@ class _QuotesListState extends State<QuotesList> {
         centerTitle: true,
       ),
       body: Column(
-        children: quotes
-            .map((quote) => Text('${quote.text}-${quote.author}'))
-            .toList(),
+        children: quotes.map((quote) =>  QuoteCard(
+            quote:quote,
+            delete:(){setState(() => {
+              quotes.remove(quote)
+            });}
+        )).toList(),
       ),
     );
   }
 }
+
